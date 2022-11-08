@@ -22,9 +22,10 @@
 
 <style scoped lang="scss">
 .square__cube {
-  width: 130px;
-  height: 130px;
+  width: 100px;
+  height: 100px;
   position: absolute;
+  z-index: -1;
 
   &--topLeft {
     top: 0;
@@ -35,11 +36,11 @@
   &--topLeft2 {
     background-color: #caccb3;
     top: 0;
-    left: 130px;
+    left: 100px;
   }
 
   &--topLeft3 {
-    top: 130px;
+    top: 100px;
     left: 0;
     background-color: #bcbe9d;
   }
@@ -52,12 +53,12 @@
 
   &--topRight2 {
     top: 0;
-    right: 130px;
+    right: 100px;
     background-color: #d5d6c2;
   }
 
   &--topRight3 {
-    top: 130px;
+    top: 100px;
     right: 0;
     background-color: #c1c3a2;
   }
@@ -70,12 +71,12 @@
 
   &--bottomLeft2 {
     bottom: 0;
-    left: 130px;
+    left: 100px;
     background-color: #d5d6c2;
   }
 
   &--bottomLeft3 {
-    bottom: 130px;
+    bottom: 100px;
     left: 0;
     background-color: #caccb3;
   }
@@ -87,13 +88,13 @@
   }
 
   &--bottomRight2 {
-    right: 130px;
+    right: 100px;
     bottom: 0;
     background-color: #dfe0d1;
   }
   &--bottomRight3 {
     right: 0;
-    bottom: 130px;
+    bottom: 100px;
     background-color: #fafaf7;
   }
 }

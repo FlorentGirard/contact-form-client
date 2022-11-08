@@ -14,8 +14,9 @@
       <BaseMessage
         label="Message"
         placeholder="Enter your message"
-        size="500"
+        class="form__message"
       />
+      <button class="form__button">Send message</button>
     </div>
   </div>
 </template>
@@ -25,8 +26,10 @@
 <style scoped lang="scss">
 .form {
   background-color: $backgroundContainer;
+  border: 1px solid #b7baa6;
   width: 700px;
-  height: 600px;
+  height: auto;
+  border-radius: 4px;
 }
 
 .form__container {
@@ -44,6 +47,28 @@
     width: 39px;
     height: 29px;
     padding-left: $gutter * 1.4;
+  }
+}
+
+.form__message {
+  margin-top: $gutter * 2;
+}
+
+.form__button {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  color: #e4e5d6;
+  font-family: $fontAlt;
+  font-size: $fontSize * 2.3;
+  padding: $gutter * 1.95 0;
+  background: linear-gradient(#36382e, #21221c);
+  margin-top: $gutter * 6;
+  border-radius: 8px;
+
+  &::after {
+    content: url('/picture/svg/send.svg');
+    transform: translateX(100px);
   }
 }
 </style>
