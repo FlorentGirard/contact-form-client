@@ -24,34 +24,23 @@
 <script lang="ts" setup></script>
 
 <style scoped lang="scss">
-.form {
-  background-color: $backgroundContainer;
-  border: 1px solid #b7baa6;
-  width: 700px;
-  height: auto;
-  border-radius: 4px;
-}
-
 .form__container {
-  margin: $gutter * 5.3 $gutter * 9 $gutter * 6.5;
+  margin: 0 $gutter * 2;
 }
 
 .form__title {
-  font-weight: 700;
-  font-size: $fontSize * 3.4;
+  font-size: $fontSize * 3;
+  text-align: center;
+  margin-bottom: $gutter * 8;
+  margin-top: $gutter * 10;
+  font-family: $fontAlt;
   display: flex;
-  margin-bottom: $gutter * 4.4;
+  justify-content: center;
 
   &::after {
     content: url('/picture/svg/baseline-contact-mail.svg');
-    width: 39px;
-    height: 29px;
-    padding-left: $gutter * 1.4;
+    padding-left: $gutter * 2;
   }
-}
-
-.form__message {
-  margin-top: $gutter * 2;
 }
 
 .form__button {
@@ -68,7 +57,37 @@
 
   &::after {
     content: url('/picture/svg/send.svg');
-    transform: translateX(100px);
+    padding-left: $gutter * 2;
+    //transform: translateX(100px);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .form {
+    background-color: $backgroundContainer;
+    border: 1px solid #b7baa6;
+    width: 700px;
+    height: auto;
+    border-radius: 4px;
+  }
+
+  .form__container {
+    margin: $gutter * 5.3 $gutter * 9 $gutter * 6.5;
+  }
+
+  .form__title {
+    font-size: $fontSize * 3.4;
+    margin-bottom: $gutter * 4.4;
+
+    &::after {
+      //width: 39px;
+      //height: 29px;
+      padding-left: $gutter * 1.4;
+    }
+  }
+
+  .form__message {
+    margin-top: $gutter * 2;
   }
 }
 </style>
