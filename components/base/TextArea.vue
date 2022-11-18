@@ -5,9 +5,19 @@
       v-bind="$attrs"
       :id="props.label"
       class="field__input"
+      :class="{
+        'field__input--error': props.error,
+        'field__input--icon-rtl': props.error,
+      }"
       :placeholder="props.placeholder"
       rows="5"
+      :aria-describedby="props.error ? `${props.label}-error` : null"
+      :aria-invalid="props.error ? true : null"
+      @input="$emit('update:modelValue', $event.target.value)"
     />
+    <BaseErrorMessage :id="`${props.label}-error`">
+      {{ props.error }}
+    </BaseErrorMessage>
   </div>
 </template>
 
@@ -23,6 +33,10 @@ const props = defineProps({
   },
   modelValue: {
     type: [String, Number],
+    default: '',
+  },
+  error: {
+    type: String,
     default: '',
   },
 })
@@ -52,6 +66,17 @@ const props = defineProps({
     -moz-box-shadow: 0 0 3px #36382e;
     -webkit-box-shadow: 0 0 3px #36382e;
     outline: none;
+  }
+
+  &--error {
+    border-color: $colorError;
+  }
+
+  &--icon-rtl {
+    background-image: url('/picture/svg/warning.svg');
+    background-position: 99% 85%;
+    background-repeat: no-repeat;
+    background-size: 20px;
   }
 }
 </style>

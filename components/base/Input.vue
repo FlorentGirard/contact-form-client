@@ -1,13 +1,23 @@
 <template>
   <div class="field">
-    <label v-if="label" class="field__label"> {{ props.label }}</label>
+    <label v-if="props.label" class="field__label"> {{ props.label }}</label>
     <input
       v-bind="$attrs"
       :id="props.label"
       :value="props.modelValue"
       class="field__input"
+      :class="{
+        'field__input--error': props.error,
+        'field__input--icon-rtl': props.error,
+      }"
       :placeholder="props.placeholder"
+      :aria-describedby="props.error ? `${props.label}-error` : null"
+      :aria-invalid="props.error ? true : null"
+      @input="$emit('update:modelValue', $event.target.value)"
     />
+    <BaseErrorMessage v-if="props.error" :id="`${props.label}-error`">
+      {{ props.error }}
+    </BaseErrorMessage>
   </div>
 </template>
 
@@ -25,6 +35,10 @@ const props = defineProps({
     type: [String, Number],
     default: '',
   },
+  error: {
+    type: String,
+    default: '',
+  },
 })
 </script>
 
@@ -39,7 +53,6 @@ const props = defineProps({
 }
 .field__input {
   width: 100%;
-  padding: 0;
   border: 1px solid #ced0c2;
   height: 32px;
   border-radius: 4px;
@@ -50,6 +63,17 @@ const props = defineProps({
     -moz-box-shadow: 0 0 3px #36382e;
     -webkit-box-shadow: 0 0 3px #36382e;
     outline: none;
+  }
+
+  &--error {
+    border-color: $colorError;
+  }
+
+  &--icon-rtl {
+    background-image: url('/picture/svg/warning.svg');
+    background-position: 98%;
+    background-repeat: no-repeat;
+    background-size: 20px;
   }
 }
 </style>

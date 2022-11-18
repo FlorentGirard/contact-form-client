@@ -4,24 +4,81 @@
       <h2 class="form__title">
         Contact us <span class="form__title--svg"></span>
       </h2>
-      <BaseInput label="Name" placeholder="Enter your Name" type="text" />
-      <BaseInput label="Email" placeholder="Enter your Email" type="email" />
-      <BaseInput
-        label="Phone Number"
-        placeholder="Enter your phone number"
-        type="text"
-      />
-      <BaseMessage
-        label="Message"
-        placeholder="Enter your message"
-        class="form__message"
-      />
-      <button class="form__button">Send message</button>
+      <form @submit.prevent="submit">
+        <fieldset>
+          <legend class="hide">Name</legend>
+          <BaseInput
+            v-model="name"
+            label="Name"
+            placeholder="Enter your Name"
+            :error="errors.name"
+            type="text"
+          />
+        </fieldset>
+        <fieldset>
+          <legend class="hide">Email</legend>
+          <BaseInput
+            v-model="email"
+            label="Email"
+            placeholder="Enter your Email"
+            type="email"
+            :error="errors.email"
+          />
+        </fieldset>
+        <fieldset>
+          <legend class="hide">Phone number</legend>
+          <BaseInput
+            v-model="phone"
+            label="Phone Number"
+            placeholder="Enter your phone number"
+            type="text"
+            :error="errors.phone"
+          />
+        </fieldset>
+        <fieldset>
+          <legend class="hide">Message</legend>
+          <BaseTextArea
+            v-model="message"
+            label="Message"
+            placeholder="Enter your message"
+            class="form__message"
+            :error="errors.message"
+          />
+        </fieldset>
+        <button type="submit" class="form__button">Send message</button>
+      </form>
     </div>
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { object, string } from 'yup'
+import { useField, useForm } from 'vee-validate'
+
+const phoneRegExp =
+  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+
+const validationSchema = object({
+  name: string().required().min(3),
+  phone: string().matches(phoneRegExp, 'Phone number is not valid'),
+  email: string().email().required('email'),
+  message: string().required('message'),
+})
+
+const { handleSubmit, errors } = useForm({
+  validationSchema,
+})
+
+const { value: name } = useField('name')
+const { value: email } = useField('email')
+const { value: phone } = useField('phone')
+const { value: message } = useField('message')
+const submit = handleSubmit((values) => {
+  console.log('envoyé', values)
+
+  //! axios
+})
+</script>
 
 <style scoped lang="scss">
 .form__container {
@@ -77,7 +134,9 @@
 
   .form__title {
     font-size: $fontSize * 3.4;
-    margin-bottom: $gutter * 4.4;
+
+    margin-bottom: $gutter * 3;
+    margin-top: $gutter * 3;
 
     &::after {
       //width: 39px;
